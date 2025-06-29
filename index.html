@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Explorer - Petualangan Antariksa Interaktif</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">MEMUAT ALAM SEMESTA...</div>
+    </div>
+
+    <!-- Space Background -->
+    <div class="space-background">
+        <div class="stars"></div>
+        <div class="twinkling"></div>
+        <div class="shooting-star" style="top: 20%; left: 10%; animation-delay: 1s;"></div>
+        <div class="shooting-star" style="top: 80%; left: 30%; animation-delay: 3s;"></div>
+        <div class="shooting-star" style="top: 40%; left: 80%; animation-delay: 5s;"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="cosmic-nav">
+        <ul>
+            <li><a href="#home" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Beranda</a></li>
+            <li><a href="#planets" class="nav-link" data-section="planets"><i class="fas fa-globe"></i> Planet</a></li>
+            <li><a href="#stars" class="nav-link" data-section="stars"><i class="fas fa-star"></i> Bintang</a></li>
+            <li><a href="#galaxies" class="nav-link" data-section="galaxies"><i class="fas fa-cloud"></i> Galaksi</a></li>
+            <li><a href="#exploration" class="nav-link" data-section="exploration"><i class="fas fa-rocket"></i> Eksplorasi</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="content-wrapper">
+        <!-- Home Section -->
+        <section id="home" class="content-section active">
+            <div class="hero-container">
+                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Galaksi" class="hero-image">
+                <div class="hero-overlay">
+                    <h1 class="hero-title">COSMIC EXPLORER</h1>
+                    <p class="hero-subtitle">Jelajahi keindahan dan misteri alam semesta melalui pengalaman interaktif yang memukau</p>
+                    <button class="cta-button" id="explore-button">
+                        <i class="fas fa-space-shuttle"></i> Mulai Eksplorasi
+                    </button>
+                </div>
+            </div>
+            
+            <p class="section-description">
+                Cosmic Explorer adalah portal Anda untuk menjelajahi keajaiban alam semesta. Temukan planet-planet menakjubkan, 
+                bintang-bintang raksasa, galaksi-galaksi yang jauh, dan misi-misi luar angkasa bersejarah. 
+                Semua dalam satu pengalaman interaktif yang mendidik dan menghibur.
+            </p>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number" id="planet-count">8</div>
+                    <div class="stat-label">Planet di Tata Surya</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Jenis Bintang</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2T+</div>
+                    <div class="stat-label">Galaksi di Alam Semesta</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">70+</div>
+                    <div class="stat-label">Tahun Eksplorasi</div>
+                </div>
+            </div>
+            
+            <div class="quiz-container" id="space-quiz">
+                <h3 class="cosmic-title" style="font-size: 2rem; margin-bottom: 20px;">Kuis Antariksa</h3>
+                <div class="quiz-question" id="quiz-question">Apa planet terbesar di tata surya kita?</div>
+                <div class="quiz-options" id="quiz-options">
+                    <div class="quiz-option" data-correct="false">Bumi</div>
+                    <div class="quiz-option" data-correct="false">Mars</div>
+                    <div class="quiz-option" data-correct="true">Jupiter</div>
+                    <div class="quiz-option" data-correct="false">Venus</div>
+                </div>
+                <div class="quiz-navigation">
+                    <button class="quiz-button" id="quiz-prev" disabled><i class="fas fa-arrow-left"></i> Sebelumnya</button>
+                    <button class="quiz-button" id="quiz-next">Selanjutnya <i class="fas fa-arrow-right"></i></button>
+                </div>
+                <div class="quiz-result" id="quiz-result"></div>
+            </div>
+        </section>
+        
+        <!-- Planets Section -->
+        <section id="planets" class="content-section">
+            <h2 class="cosmic-title">Planet-Planet Tata Surya</h2>
+            <p class="section-description">
+                Jelajahi delapan planet yang mengorbit Matahari kita. Setiap planet memiliki karakteristik unik 
+                dan keindahan yang memukau. Klik pada planet di model interaktif atau kartu di bawah untuk 
+                mempelajari lebih lanjut.
+            </p>
+            
+            <div class="planet-controls">
+                <button class="control-button active" id="view-orbits">Tampilkan Orbit</button>
+                <button class="control-button" id="view-scale">Skala Nyata</button>
+                <button class="control-button" id="view-speed">Kecepatan: Normal</button>
+            </div>
+            
+            <div class="solar-system-container">
+                <div class="solar-system" id="solar-system">
+                    <div class="sun" id="sun" title="Matahari - Bintang Kita"></div>
+                    
+                    <!-- Planet orbits and planets will be generated by JavaScript -->
+                </div>
+                <div class="planet-info-tooltip" id="planet-tooltip"></div>
+            </div>
+            
+            <div class="planet-grid" id="planet-container">
+                <!-- Planet cards will be generated by JavaScript -->
+            </div>
+            
+            <div class="planet-detail-container" id="planet-detail">
+                <button class="back-button" id="back-to-planets"><i class="fas fa-arrow-left"></i> Kembali ke Daftar Planet</button>
+                <div class="planet-detail-header">
+                    <img src="" alt="Planet" class="planet-detail-image" id="detail-planet-image">
+                    <div>
+                        <h2 class="planet-detail-title" id="detail-planet-name">Planet</h2>
+                        <p class="planet-detail-subtitle" id="detail-planet-description">Deskripsi planet</p>
+                    </div>
+                </div>
+                
+                <div class="planet-detail-facts" id="planet-facts-container">
+                    <!-- Planet facts will be generated by JavaScript -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stars Section -->
+        <section id="stars" class="content-section">
+            <h2 class="cosmic-title">Bintang-Bintang di Alam Semesta</h2>
+            <p class="section-description">
+                Bintang adalah bola plasma bercahaya yang disatukan oleh gravitasinya sendiri. 
+                Matahari kita hanyalah satu dari miliaran bintang di galaksi Bima Sakti.
+            </p>
+            
+            <div class="star-info-container">
+                <img src="https://images.unsplash.com/photo-1465101162946-4377e57745c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bintang" class="star-image">
+                <div class="star-details">
+                    <h3 style="font-family: 'Orbitron', sans-serif; font-size: 2rem; color: var(--neon-blue); margin-top: 0;">Matahari - Bintang Kita</h3>
+                    <p>Matahari adalah bintang di pusat tata surya kita. Ini adalah bola plasma panas yang hampir sempurna, dengan gerakan konveksi internal yang menghasilkan medan magnet melalui proses dinamo. Matahari menyediakan energi yang sangat penting bagi kehidupan di Bumi.</p>
+                    
+                    <div class="planet-fact">
+                        <h4>Fakta Menarik</h4>
+                        <p>Matahari menyumbang sekitar 99,86% dari total massa tata surya. Suhu intinya mencapai 15 juta derajat Celsius!</p>
+                    </div>
+                    
+                    <div class="planet-fact">
+                        <h4>Ukuran</h4>
+                        <p>Diameter Matahari sekitar 1,39 juta kilometer - cukup besar untuk menampung 1,3 juta Bumi di dalamnya!</p>
+                    </div>
+                    
+                    <button class="planet-btn" id="star-lifecycle-btn">
+                        <i class="fas fa-chart-line"></i> Lihat Siklus Hidup Bintang
+                    </button>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 50px; font-family: 'Orbitron', sans-serif; color: var(--neon-purple); text-align: center; font-size: 2rem;">Jenis-Jenis Bintang</h3>
+            
+            <div class="star-types">
+                <div class="star-type-card">
+                    <div class="star-icon" style="background: #FFD700; box-shadow: 0 0 30px #FFD700;">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3>Bintang Katai Kuning</h3>
+                    <p>Seperti Matahari kita, dengan suhu permukaan 5,000-6,000°C dan masa hidup sekitar 10 miliar tahun.</p>
+                    <button class="planet-btn" style="background: #FFD700;">
+                        <i class="fas fa-info-circle"></i> Pelajari
+                    </button>
+                </div>
+                
+                <div class="star-type-card">
+                    <div class="star-icon" style="background: #FF4500; box-shadow: 0 0 30px #FF4500;">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>Bintang Raksasa Merah</h3>
+                    <p>Bintang tua yang telah mengembang, dengan diameter ratusan kali Matahari dan suhu permukaan lebih dingin.</p>
+                    <button class="planet-btn" style="background: #FF4500;">
+                        <i class="fas fa-info-circle"></i> Pelajari
+                    </button>
+                </div>
+                
+                <div class="star-type-card">
+                    <div class="star-icon" style="background: #87CEFA; box-shadow: 0 0 30px #87CEFA;">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Bintang Super Raksasa Biru</h3>
+                    <p>Bintang sangat panas dan masif dengan suhu permukaan di atas 30,000°C dan masa hidup yang pendek.</p>
+                    <button class="planet-btn" style="background: #87CEFA;">
+                        <i class="fas fa-info-circle"></i> Pelajari
+                    </button>
+                </div>
+                
+                <div class="star-type-card">
+                    <div class="star-icon" style="background: #A9A9A9; box-shadow: 0 0 30px #A9A9A9;">
+                        <i class="fas fa-circle"></i>
+                    </div>
+                    <h3>Katai Putih</h3>
+                    <p>Sisa inti bintang yang telah kehabisan bahan bakar nuklir, sangat padat dengan ukuran seperti Bumi tetapi massa seperti Matahari.</p>
+                    <button class="planet-btn" style="background: #A9A9A9;">
+                        <i class="fas fa-info-circle"></i> Pelajari
+                    </button>
+                </div>
+            </div>
+            
+            <div class="planet-fact" style="margin-top: 40px;">
+                <h4>Fakta Menarik Tentang Bintang</h4>
+                <p>Bintang terbesar yang diketahui, UY Scuti, memiliki radius sekitar 1.700 kali Matahari kita. Jika diletakkan di pusat tata surya kita, ia akan melampaui orbit Jupiter! Di sisi lain, bintang neutron (sisa-sisa bintang masif yang meledak) begitu padat sehingga satu sendok teh materialnya akan memiliki massa sekitar satu miliar ton di Bumi.</p>
+            </div>
+        </section>
+        
+        <!-- Galaxies Section -->
+        <section id="galaxies" class="content-section">
+            <h2 class="cosmic-title">Galaksi-Galaksi di Alam Semesta</h2>
+            <p class="section-description">
+                Galaksi adalah sistem masif yang terikat gravitasi yang terdiri dari bintang, sisa bintang, medium antarbintang, 
+                gas, debu, dan materi gelap. Jelajahi berbagai jenis galaksi yang menakjubkan di alam semesta kita.
+            </p>
+            
+            <div class="galaxy-grid">
+                <div class="galaxy-card" data-galaxy="milky-way">
+                    <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bima Sakti">
+                    <div class="galaxy-info">
+                        <h3>Bima Sakti</h3>
+                        <p>Galaksi spiral yang menjadi rumah bagi tata surya kita</p>
+                    </div>
+                </div>
+                
+                <div class="galaxy-card" data-galaxy="andromeda">
+                    <img src="https://images.unsplash.com/photo-1462332420958-a05d1e002413?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Andromeda">
+                    <div class="galaxy-info">
+                        <h3>Andromeda</h3>
+                        <p>Galaksi spiral terdekat dengan Bima Sakti</p>
+                    </div>
+                </div>
+                
+                <div class="galaxy-card" data-galaxy="sombrero">
+                    <img src="https://images.pexels.com/photos/2150/sky-space-dark-galaxy.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Galaksi Sombrero">
+                    <div class="galaxy-info">
+                        <h3>Sombrero</h3>
+                        <p>Galaksi dengan cincin debu yang khas</p>
+                    </div>
+                </div>
+                
+                <div class="galaxy-card" data-galaxy="whirlpool">
+                    <img src="https://images.pexels.com/photos/73873/star-clusters-rosette-nebula-star-galaxy-73873.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Galaksi Whirlpool">
+                    <div class="galaxy-info">
+                        <h3>Whirlpool</h3>
+                        <p>Galaksi spiral yang berinteraksi dengan galaksi pendamping</p>
+                    </div>
+                </div>
+                
+                <div class="galaxy-card" data-galaxy="triangulum">
+                    <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Triangulum">
+                    <div class="galaxy-info">
+                        <h3>Triangulum</h3>
+                        <p>Galaksi spiral kecil di Grup Lokal</p>
+                    </div>
+                </div>
+                
+                <div class="galaxy-card" data-galaxy="black-eye">
+                    <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Black Eye">
+                    <div class="galaxy-info">
+                        <h3>Black Eye</h3>
+                        <p>Galaksi dengan daerah pusat yang sangat gelap</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="galaxy-detail-container" id="galaxy-detail">
+                <button class="back-button" id="back-to-galaxies"><i class="fas fa-arrow-left"></i> Kembali ke Daftar Galaksi</button>
+                <div class="galaxy-detail-header">
+                    <img src="" alt="Galaksi" class="galaxy-detail-image" id="detail-galaxy-image">
+                    <div>
+                        <h2 class="galaxy-detail-title" id="detail-galaxy-name">Galaksi</h2>
+                        <p id="detail-galaxy-type">Tipe: Spiral</p>
+                    </div>
+                </div>
+                
+                <div class="galaxy-detail-content">
+                    <div class="galaxy-detail-description" id="detail-galaxy-description">
+                        <p>Deskripsi galaksi akan muncul di sini.</p>
+                    </div>
+                    
+                    <div class="galaxy-detail-facts">
+                        <h4>Fakta Cepat</h4>
+                        <div id="galaxy-facts">
+                            <!-- Galaxy facts will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="planet-fact" style="margin-top: 40px;">
+                <h4>Fakta Menarik Tentang Galaksi</h4>
+                <p>Alam semesta yang teramati diperkirakan mengandung lebih dari 2 triliun galaksi. Galaksi terkecil hanya memiliki beberapa juta bintang, sementara yang terbesar bisa memiliki 100 triliun bintang! Galaksi Bima Sakti kita sendiri diperkirakan mengandung 100-400 miliar bintang dan bergerak melalui ruang dengan kecepatan sekitar 2,1 juta kilometer per jam.</p>
+            </div>
+        </section>
+        
+        <!-- Exploration Section -->
+        <section id="exploration" class="content-section">
+            <h2 class="cosmic-title">Eksplorasi Luar Angkasa</h2>
+            <p class="section-description">
+                Perjalanan manusia dalam menjelajahi dan memahami alam semesta melalui misi-misi luar angkasa yang bersejarah 
+                dan teknologi yang terus berkembang.
+            </p>
+            
+            <div class="mission-timeline">
+                <div class="mission-item">
+                    <div class="mission-year">1957</div>
+                    <div class="mission-content">
+                        <h3>Sputnik 1</h3>
+                        <p>Satelit buatan pertama yang diluncurkan oleh Uni Soviet pada 4 Oktober 1957, menandai dimulainya era luar angkasa dan perlombaan antariksa antara Uni Soviet dan Amerika Serikat.</p>
+                        <img src="https://images.pexels.com/photos/414171/pexels-photo-414171.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Sputnik">
+                    </div>
+                </div>
+                
+                <div class="mission-item">
+                    <div class="mission-year">1961</div>
+                    <div class="mission-content">
+                        <h3>Vostok 1</h3>
+                        <p>Misi pertama yang membawa manusia ke luar angkasa. Yuri Gagarin dari Uni Soviet menjadi manusia pertama di luar angkasa, menyelesaikan satu orbit mengelilingi Bumi.</p>
+                        <img src="https://images.unsplash.com/photo-1541873676-a18131494184?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Vostok 1">
+                    </div>
+                </div>
+                
+                <div class="mission-item">
+                    <div class="mission-year">1969</div>
+                    <div class="mission-content">
+                        <h3>Apollo 11</h3>
+                        <p>Misi pertama yang mendaratkan manusia di Bulan. Neil Armstrong dan Buzz Aldrin menjadi manusia pertama yang berjalan di permukaan bulan, sementara Michael Collins tetap mengorbit di modul komando.</p>
+                        <img src="https://images.unsplash.com/photo-1541873676-a18131494184?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Apollo 11">
+                    </div>
+                </div>
+                
+                <div class="mission-item">
+                    <div class="mission-year">1977</div>
+                    <div class="mission-content">
+                        <h3>Voyager 1 & 2</h3>
+                        <p>Misi kembar yang diluncurkan untuk mempelajari planet-planet luar. Voyager 1 menjadi objek buatan manusia pertama yang memasuki ruang antarbintang pada tahun 2012.</p>
+                        <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Voyager">
+                    </div>
+                </div>
+                
+                <div class="mission-item">
+                    <div class="mission-year">1990</div>
+                    <div class="mission-content">
+                        <h3>Teleskop Hubble</h3>
+                        <p>Diluncurkan ke orbit Bumi rendah dan telah memberikan beberapa gambar alam semesta paling detail yang pernah dilihat, merevolusi pemahaman kita tentang kosmos.</p>
+                        <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Hubble">
+                    </div>
+                </div>
+                
+                <div class="mission-item">
+                    <div class="mission-year">2021</div>
+                    <div class="mission-content">
+                        <h3>Teleskop James Webb</h3>
+                        <p>Penerus Hubble yang dirancang untuk melihat lebih jauh ke alam semesta daripada sebelumnya, mempelajari pembentukan bintang dan galaksi pertama serta atmosfer planet ekstrasurya.</p>
+                        <img src="https://images.unsplash.com/photo-1640622661480-8d5dc347a5d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="James Webb">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="future-missions">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--neon-pink); text-align: center; font-size: 2rem;">Misi Masa Depan</h3>
+                
+                <div class="future-mission-card">
+                    <h3>Artemis Program</h3>
+                    <p>Program NASA untuk mengembalikan manusia ke Bulan, termasuk wanita pertama dan orang kulit berwarna pertama. Bertujuan untuk membangun kehadiran manusia yang berkelanjutan di Bulan sebagai batu loncatan untuk misi Mars di masa depan.</p>
+                </div>
+                
+                <div class="future-mission-card">
+                    <h3>Mars Sample Return</h3>
+                    <p>Misi ambisius untuk membawa sampel batuan dan tanah Mars kembali ke Bumi untuk dianalisis secara mendetail, sebuah kolaborasi antara NASA dan ESA (European Space Agency).</p>
+                </div>
+                
+                <div class="future-mission-card">
+                    <h3>Europa Clipper</h3>
+                    <p>Misi untuk mempelajari bulan Jupiter, Europa, yang memiliki lautan air asin di bawah kerak esnya. Para ilmuwan ingin menyelidiki potensi Europa untuk mendukung kehidupan.</p>
+                </div>
+            </div>
+            
+            <div class="planet-fact" style="margin-top: 40px;">
+                <h4>Masa Depan Eksplorasi</h4>
+                <p>NASA berencana mengembalikan manusia ke Bulan melalui program Artemis, dengan tujuan akhir mendaratkan manusia di Mars pada 2030-an. Sementara itu, misi robotik terus menjelajahi planet-planet dan benda langit lainnya di tata surya kita. Perusahaan swasta seperti SpaceX dan Blue Origin juga memainkan peran yang semakin besar dalam eksplorasi ruang angkasa, dengan visi jangka panjang termasuk kolonisasi Mars dan pariwisata luar angkasa.</p>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="cosmic-footer">
+        <h3 class="footer-title">COSMIC EXPLORER</h3>
+        <div class="footer-links">
+            <a href="#home" class="footer-link">Beranda</a>
+            <a href="#planets" class="footer-link">Planet</a>
+            <a href="#stars" class="footer-link">Bintang</a>
+            <a href="#galaxies" class="footer-link">Galaksi</a>
+            <a href="#exploration" class="footer-link">Eksplorasi</a>
+            <a href="#" class="footer-link" id="about-link">Tentang</a>
+        </div>
+        <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p class="footer-copyright">&copy; 2023 Cosmic Explorer. Semua hak dilindungi.</p>
+    </footer>
+    
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle" id="dark-mode-toggle">
+        <i class="fas fa-moon"></i>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Modal Title</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-content" id="modal-content">
+                <img src="" alt="Modal Image" id="modal-image">
+                <p id="modal-text">Modal content will appear here.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
